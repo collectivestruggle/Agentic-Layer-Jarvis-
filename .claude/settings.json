@@ -1,0 +1,25 @@
+{
+  "enabledMcpjsonServers": ["openjarvis"],
+  "permissions": {
+    "allow": [
+      "mcp__openjarvis__file_read",
+      "mcp__openjarvis__git_status",
+      "mcp__openjarvis__git_diff",
+      "mcp__openjarvis__git_log",
+      "mcp__openjarvis__think",
+      "mcp__openjarvis__memory_retrieve",
+      "mcp__openjarvis__memory_search",
+      "mcp__openjarvis__kg_query",
+      "mcp__openjarvis__kg_neighbors"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          { "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR\" && uv sync --quiet >&2 || true" }
+        ]
+      }
+    ]
+  }
+}
