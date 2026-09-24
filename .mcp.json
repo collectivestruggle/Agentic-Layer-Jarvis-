@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "openjarvis": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--quiet",
+        "python",
+        "-m",
+        "openjarvis.mcp",
+        "--tools",
+        "file_read,file_write,apply_patch,git_status,git_diff,git_log,git_commit,shell_exec,think,memory_store,memory_retrieve,memory_search,kg_add_entity,kg_add_relation,kg_query,kg_neighbors"
+      ]
+    }
+  }
+}
