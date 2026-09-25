@@ -1,0 +1,32 @@
+name: Agent 2 Smoke Test
+
+on:
+  push:
+    branches:
+      - agent-2/jarvis-openai-agent
+    paths:
+      - "agent2/**"
+      - "tests/agent2/**"
+      - ".github/workflows/agent2-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  jarvis-mcp-round-trip:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+
+      - uses: astral-sh/setup-uv@v10.1.0
+
+      - name: Install test dependencies
+        run: uv sync --extra dev
+
+      - name: Prove Agent 2 can execute a Jarvis tool through MCP
+        run: uv run pytest tests/agent2/test_mcp_round_trip.py -q
