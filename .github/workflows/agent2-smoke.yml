@@ -28,5 +28,8 @@ jobs:
       - name: Install test dependencies
         run: uv sync --extra dev
 
-      - name: Prove Agent 2 can execute a Jarvis tool through MCP
+      - name: Prove Jarvis MCP tool execution
         run: uv run pytest tests/agent2/test_mcp_round_trip.py -q
+
+      - name: Prove OpenAI SDK can discover Jarvis through the wrapper
+        run: uv run --with openai-agents pytest tests/agent2/test_openai_bridge.py -q
