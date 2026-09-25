@@ -6,6 +6,7 @@ on:
       - agent-2/jarvis-openai-agent
     paths:
       - "agent2/**"
+      - "src/openjarvis/agents/templates/branch_steward.toml"
       - "tests/agent2/**"
       - ".github/workflows/agent2-smoke.yml"
   workflow_dispatch:
@@ -14,7 +15,7 @@ permissions:
   contents: read
 
 jobs:
-  jarvis-mcp-round-trip:
+  openjarvis-agent2:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -31,5 +32,5 @@ jobs:
       - name: Prove Jarvis MCP tool execution
         run: uv run pytest tests/agent2/test_mcp_round_trip.py -q
 
-      - name: Prove OpenAI SDK can discover Jarvis through the wrapper
-        run: uv run --with openai-agents pytest tests/agent2/test_openai_bridge.py -q
+      - name: Prove Branch Steward is a real OpenJarvis managed-agent template
+        run: uv run pytest tests/agent2/test_branch_steward.py -q
