@@ -17,7 +17,7 @@
     "SessionStart": [
       {
         "hooks": [
-          { "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR\" && uv sync --quiet >&2 || true" }
+          { "type": "command", "command": "cd \"$CLAUDE_PROJECT_DIR\" && uv sync --quiet --inexact >&2 || true" }
         ]
       }
     ]
