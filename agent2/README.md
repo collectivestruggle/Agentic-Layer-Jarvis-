@@ -62,3 +62,28 @@ This wrapper does not modify `main`. All Agent 2 integration work belongs on
 This first wrapper creates the Jarvis side of the bridge. The next integration
 step is attaching an OpenAI agent runtime to this MCP process and proving a
 round-trip tool call.
+
+## OpenAI agent bridge
+
+The next layer is implemented in `agent2/openai_bridge.py`.
+
+It uses OpenAI's official Agents SDK `MCPServerStdio` transport to launch this
+branch's Jarvis wrapper as a subprocess. The OpenAI agent then receives the
+Jarvis tools through MCP.
+
+Check that the OpenAI SDK can discover the Jarvis tool surface without making a
+model call:
+
+```bash
+uv run --with openai-agents pytest tests/agent2/test_openai_bridge.py -q
+```
+
+Run a live OpenAI agent through Jarvis:
+
+```bash
+export OPENAI_API_KEY=...
+uv run --with openai-agents python -m agent2.openai_bridge "Calculate 6 times 7."
+```
+
+The live run requires an OpenAI API credential in the runtime. The credential
+is read from the environment and is never stored in this repository.
